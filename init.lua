@@ -5,7 +5,7 @@ local function keyCode(key, modifiers)
    return function()
       hs.eventtap.event.newKeyEvent(modifiers, string.lower(key), true):post()
       hs.timer.usleep(1000)
-      hs.eventtap.event.newKeyEvent(modifiers, string.lower(key), false):post()      
+      hs.eventtap.event.newKeyEvent(modifiers, string.lower(key), false):post()
    end
 end
 
@@ -37,7 +37,7 @@ local function handleGlobalAppEvent(name, event, app)
    if event == hs.application.watcher.activated then
       -- hs.alert.show(name)
       if name == "iTerm2" or name == "Emacs" then
-         disableAllHotkeys()         
+         disableAllHotkeys()
       else
          enableAllHotkeys()
       end
@@ -47,7 +47,7 @@ end
 appsWatcher = hs.application.watcher.new(handleGlobalAppEvent)
 appsWatcher:start()
 
--- カーソル移動
+-- Move Cursor
 remapKey({'ctrl'}, 'f', keyCode('right'))
 remapKey({'ctrl'}, 'b', keyCode('left'))
 remapKey({'ctrl'}, 'n', keyCode('down'))
@@ -55,22 +55,22 @@ remapKey({'ctrl'}, 'p', keyCode('up'))
 remapKey({'ctrl'}, 'e', keyCode('right', {'cmd'}))
 remapKey({'ctrl'}, 'a', keyCode('left', {'cmd'}))
 
--- テキスト編集
+-- Edit Text
 remapKey({'ctrl'}, 'w', keyCode('x', {'cmd'}))
 remapKey({'ctrl'}, 'y', keyCode('v', {'cmd'}))
 remapKey({'ctrl'}, 'd', keyCode('forwarddelete'))
 remapKey({'ctrl'}, 'h', keyCode('delete'))
 remapKey({'ctrl'}, 'k', keyCodeSet({
-  keyCode('right', {'cmd', 'shift'}), 
+  keyCode('right', {'cmd', 'shift'}),
   keyCode('x', {'cmd'})
 }))
 
--- コマンド
+-- Command
 remapKey({'ctrl'}, 's', keyCode('f', {'cmd'}))
 remapKey({'ctrl'}, '/', keyCode('z', {'cmd'}))
 remapKey({'ctrl'}, 'g', keyCode('escape'))
 
--- ページスクロール
+-- Page Scroll
 remapKey({'ctrl'}, 'v', keyCode('pagedown'))
 remapKey({'alt'}, 'v', keyCode('pageup'))
 remapKey({'cmd', 'shift'}, ',', keyCode('home'))
